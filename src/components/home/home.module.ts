@@ -1,3 +1,3 @@
 import { HomeComponent } from './home.component';
 
-customElements.define('home', HomeComponent);
+customElements.define('x-home', HomeComponent);

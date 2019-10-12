@@ -3,11 +3,12 @@ import { store } from '../../store/store';
 import { connect } from 'pwa-helpers/connect-mixin';
 import { Route } from './router.config';
 import { hashSelector, routeSelector } from './router.selectors';
+import { unsafeHTML } from 'lit-html/directives/unsafe-html';
 
 export class RouterComponent extends connect(store)(LitElement) {
+    routesLoadingStatus: {[hash: string]: boolean} = {};
     activeRoute: Route;
     hash: string;
-    routesLoadingStatus: {[hash: string]: boolean};
 
     static get properties() {
         return {
@@ -22,7 +23,9 @@ export class RouterComponent extends connect(store)(LitElement) {
     stateChanged(state: any) {
         this.hash = hashSelector(state);
         this.activeRoute = routeSelector(state);
-        this.loadRoute();
+        if (this.hash && this.activeRoute) {
+            this.loadRoute();
+        }
     }
 
     loadRoute() {
@@ -40,7 +43,7 @@ export class RouterComponent extends connect(store)(LitElement) {
     }
 
     render() {
-        return html`<div>${this.getComponent()}</div>`
+        return html`${unsafeHTML(this.getComponent())}`
     }
 }
 

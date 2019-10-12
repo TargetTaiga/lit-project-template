@@ -6,11 +6,11 @@ export interface Route {
 }
 
 export const routerConfig: Route[] = [{
-    path: 'home',
-    component: 'home',
+    path: '',
+    component: 'x-home',
     load: () => import('../home/home.module')
 }, {
-    path: 'page1',
-    component: 'home',
-    load: () => import('../home/home.module')
+    path: 'about',
+    component: 'x-contact',
+    load: () => import('../contact/contact.module')
 }];

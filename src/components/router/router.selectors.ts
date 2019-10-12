@@ -11,7 +11,7 @@ export const routeSelector = createSelector(
         if (hash) {
             const parts = hash.slice(2).split('/');
             try {
-                let route: Route;
+                let route: Route = null;
                 let children: Route[] = routerConfig;
                 parts.forEach((part: string) => {
                     const target = children.find((route: Route) => route.path === part);
@@ -20,7 +20,8 @@ export const routeSelector = createSelector(
                 });
                 return route;
             } catch (e) {
-                throw new Error(`There's no matching route for path ${hash}`);
+                console.error(`There's no matching route for path ${hash}`);
+                return null;
             }
         }
         return null;
