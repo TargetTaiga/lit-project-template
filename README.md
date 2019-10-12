@@ -31,4 +31,5 @@ Thus this code:
 Will be transformed into
 ```
 <input @input="${this.handleInput}"/>
-``` 
+```
+Full configuration can be found in ``rollup.config.js``
