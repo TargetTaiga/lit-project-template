@@ -42,7 +42,6 @@ const bundleConfig = {
         resolve(),
         typescript(),
         stringifyJsx({
-            parserOptions: { sourceType: 'module', plugins: ['jsx', 'dynamicImport'] },
             customAttributeReplacementFn: (nodePath, defaultReplacement) => {
                 if (defaultReplacement) {
                     return defaultReplacement;
@@ -59,6 +58,8 @@ const bundleConfig = {
                 }
                 return attribute;
             }
+        }, {
+            plugins: ["@babel/plugin-syntax-dynamic-import"]
         }),
         copy({ targets: [{ src: 'src/index.html', dest: 'dist' }] }),
         replace({
